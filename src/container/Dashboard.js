@@ -1,6 +1,6 @@
 import React from 'react'
 
-class Auth extends React.Component{
+class Dashboard extends React.Component{
   constructor(props) {
     super(props)
   }
@@ -13,4 +13,4 @@ class Auth extends React.Component{
   }
 }
 
-export default Auth
+export default Dashboard
