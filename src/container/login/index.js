@@ -2,6 +2,7 @@ import React from 'react'
 import Logo from '../../component/logo'
 import { connect } from 'react-redux'
 import { login } from '../../redux/user'
+import { Redirect } from 'react-router-dom'
 import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
 
 @connect(
@@ -38,6 +39,7 @@ class Login extends React.Component{
     })
     return (
       <div>
+        {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : ''}
         <Logo />
         <WingBlank>
           <List>

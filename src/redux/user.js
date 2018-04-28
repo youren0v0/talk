@@ -18,7 +18,7 @@ const initState={
 export function user(state = initState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return {...state, msg: '', isAuth: true, ...action.payload}
+      return {...state, msg: '', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
     case REGISTER_SUCCESS:
       return {...state, msg: '', redirectTo: getRedirectPath(action.payload), isAuth: true, ...action.payload}
     case ERROR_MSG:
@@ -42,6 +42,29 @@ function registerSuccess(payload) {
   console.log('registerSuccess')
   return {payload, type: REGISTER_SUCCESS}
 }
+export function userinfo() {
+  return dispatch => {
+    // 获取用户信息
+    axios.get('/user/info').then((res) => {
+      if (res.status == 200) {
+        console.log(res)
+        if (res.data.code == 0) {
+          // 有登录信息的
+        } else {
+          console.log(this.props.history, 'history')
+          this.props.history.push('/login')
+        }
+        console.log(res.data)
+      }
+    })
+    // 是否登录
+    // 用户的身份 type
+    // 用户是否完善信息
+    // 现在的url 是否和当前相同
+  }
+
+}
+
 export function login({user, password}) {
   if (!user || !password) {
     return errorMsg('缺少必填项')
