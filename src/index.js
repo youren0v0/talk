@@ -15,6 +15,8 @@ import registerServiceWorker from './registerServiceWorker'
 import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
 import Login from './container/login'
 import Register from './container/register'
+import BossInfo from './container/bossInfo'
+import GeniusInfo from './container/geniusInfo'
 import AuthRoute from './component/authroute'
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
@@ -27,6 +29,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <AuthRoute></AuthRoute>
+        <Route path="/bossinfo" component={BossInfo}></Route>
+        <Route path="/geniusinfo" component={GeniusInfo}></Route>
         <Route path="/login" component={Login}></Route>
         <Route path="/register" component={Register}></Route>
 

@@ -12,3 +12,4 @@
     babel-plugin-import
     less-loader less
     utility 加密用的第三方库
+    prop-types react提供的 对react组件中props对象中的变量进行类型检测

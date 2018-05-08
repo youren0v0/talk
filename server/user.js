@@ -17,13 +17,13 @@ Router.post('/login', function(req, res){
     console.log(doc, 'doc')
     if (doc) {
       if (doc.password !== md5Pwd(password)) {
-        return res.json({code:1, msg:'密码错误'})
+        return res.json({code: 1, msg:'密码错误'})
       }
       let id = doc['_id']
       res.cookie('userid', id)
-      return res.json({code:0, msg:'登录成功', data: doc})
+      return res.json({code: 0, msg:'登录成功', data: doc})
     } else {
-      return res.json({code:1, msg:'用户不存在'})
+      return res.json({code: 1, msg:'用户不存在'})
     }
   })
 })
@@ -33,14 +33,30 @@ Router.post('/register', function(req, res){
   User.findOne({user},function(err,doc){
     console.log(doc, 'doc')
     if (doc) {
-      return res.json({code:1,msg:'用户名重复'})
+      return res.json({code: 1,msg:'用户名重复'})
     }
     User.create({user, password: md5Pwd(password), type}, function (err, doc) {
       if (err) {
         return res.json({code: 1, msg: '后端出错了'})
       }
+      let id = doc['_id']
+      res.cookie('userid', id)
       return res.json({code: 0, msg: '注册成功'})
     })
+  })
+})
+Router.post('/update', function(req, res){
+  const userid = req.cookies.userid
+  if (!userid) {
+    return res.json({code:1})
+  }
+  const body = req.body
+  User.findByIdAndUpdate(userid,body,function(err,doc){
+    const data = Object.assign({},{
+      user:doc.user,
+      type:doc.type
+    },body)
+    return res.json({code:0,data})
   })
 })
 function md5Pwd(password) {

@@ -51,7 +51,7 @@ class Register extends React.Component{
     ]
     const radioData = [{
       key: '1',
-      name: 'genuis'
+      name: 'genius'
     }, {
       key: '2',
       name: 'boss'
