@@ -34,7 +34,7 @@ function errorMsg(msg) {
 function authSuccess(obj){
   // 这里是要把password删掉，不传
   const {password,...data} = obj
-  return {payload:data, type: AUTH_SUCCESS}
+  return {payload: data, type: AUTH_SUCCESS}
 }
 
 export function userinfo() {
@@ -69,7 +69,8 @@ export function login({user, password}) {
     axios.post('/user/login', {user, password}).then((res) => {
       console.log(res, 'res')
       if (res.status == 200 && res.data.code === 0) {
-        dispatch(authSuccess({user, password}))
+        console.log(res.data, 'data~~~~~~~~~~~')
+        dispatch(authSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }
@@ -90,7 +91,7 @@ export function register({type, user, password, password2}) {
     axios.post('/user/register', {user, password, type}).then((res) => {
       console.log(res, 'res')
       if (res.status == 200 && res.data.code === 0) {
-        dispatch(authSuccess({user, password, type}))
+        dispatch(authSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }

@@ -4,6 +4,9 @@ import { NavBar, InputItem, TextareaItem, Button } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { update } from '@/redux/user'
 import { Redirect } from 'react-router-dom'
+// 这种写法因为用了babel-plugin-transform-decorators-legacy
+// 等于 let App = connect(省略)(App)
+// connect 把state和action给到props上
 @connect(
   state=>state.user,
   {update}
@@ -65,3 +68,4 @@ class BossInfo extends React.Component{
 }
 
 export default BossInfo
+
