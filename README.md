@@ -14,7 +14,7 @@
     utility 加密用的第三方库
     prop-types react提供的 对react组件中props对象中的变量进行类型检测
 ### 笔记：
-    prop-types
+#### 1) prop-types
     摘自： https://www.cnblogs.com/penghuwan/p/6796139.html
 ##### 利用propTypes检测全部数据类型的变量
     class Son extends React.Component{
