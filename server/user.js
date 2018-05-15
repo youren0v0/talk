@@ -7,8 +7,9 @@ const _filter = {'password':0,'__v':0}
 
 Router.get('/list', function (req, res) {
   const { type } = req.query
+  console.log(type, 'type')
   User.find({type}, function (err, doc) {
-    return res.json(doc)
+    return res.json({code: 0,data: doc})
   })
 })
 Router.post('/login', function(req, res){
@@ -42,7 +43,7 @@ Router.post('/register', function(req, res){
       }
       let id = doc['_id']
       res.cookie('userid', id)
-      return res.json({code: 0, msg: '注册成功'})
+      return res.json({code: 0, msg: '注册成功', data: doc})
     })
   })
 })
@@ -52,6 +53,7 @@ Router.post('/update', function(req, res){
     return res.json({code:1})
   }
   const body = req.body
+  console.log(body, 'update body')
   User.findByIdAndUpdate(userid,body,function(err,doc){
     const data = Object.assign({},{
       user:doc.user,

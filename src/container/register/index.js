@@ -6,6 +6,10 @@ import { Redirect } from 'react-router-dom'
 import {List, InputItem, Radio, WingBlank, WhiteSpace, Button, Toast} from 'antd-mobile'
 
 // 这种写法因为用了babel-plugin-transform-decorators-legacy
+// '@' 这玩意是es7 的语法： ES7 Decorator 装饰器https://segmentfault.com/p/1210000009968000/read
+// babel-plugin-transform-decorators-legacy：这玩意是让es5用@语法的
+// 呵 (╯°Д°)╯︵ ┻━┻
+
 // 等于 let Register = connect(省略)(Register)
 @connect(
   state => state.user,

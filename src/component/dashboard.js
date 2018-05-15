@@ -2,16 +2,11 @@ import React from 'react'
 import {NavBar} from 'antd-mobile'
 import {connect} from 'react-redux'
 import {Switch, Route} from 'react-router-dom'
-import Boss from '@/component/boss'
-import Genius from '@/component/genius'
+import Boss from '@/container/boss'
+import Genius from '@/container/genius'
+import User from '@/container/user'
+import Msg from '@/container/msg'
 import NavLinkBar from '@/component/navlink'
-
-function Msg(){
-  return <h2>消息列表页面</h2>
-}
-function User(){
-  return <h2>个人中心页面</h2>
-}
 
 @connect(
   state=>state

@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom'
 @withRouter
+
 class AuthRoute extends React.Component{
   componentDidMount() {
     const publicList = ['/login', '/register']

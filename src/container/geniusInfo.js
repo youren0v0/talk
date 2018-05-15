@@ -39,7 +39,7 @@ class GeniusInfo extends React.Component{
         }}></AvatarSelector>
         {inputList}
         <TextareaItem
-          onChange={(v)=>this.onChange('desc',v)}
+          onChange={(v)=>this.changeInput('desc',v)}
           rows={3}
           autoHeight
           title='个人见解'

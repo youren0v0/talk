@@ -13,6 +13,7 @@
     less-loader less
     utility 加密用的第三方库
     prop-types react提供的 对react组件中props对象中的变量进行类型检测
+    browser-cookies 操作cookies的库
 ### 笔记：
 #### 1) prop-types
     摘自： https://www.cnblogs.com/penghuwan/p/6796139.html
@@ -65,3 +66,6 @@
          age:PropTypes.number
           })
     }
+#### 2) 高阶组件
+##### 就是函数式编程，react的运用上似乎类似vue的slot
+##### vue的slot源码是怎么实现的？
