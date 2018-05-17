@@ -1,7 +1,8 @@
 import React from 'react'
-import Logo from '../../component/logo'
+import Logo from '@/component/logo'
 import { connect } from 'react-redux'
-import { login } from '../../redux/user'
+import { login } from '@/redux/user'
+import form from '@/component/form'
 import { Redirect } from 'react-router-dom'
 import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
 
@@ -9,16 +10,13 @@ import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
   state => state.user,
   { login }
 )
+@form
 class Login extends React.Component{
-  state = {}
   goRegister() {
     this.props.history.push('./register')
   }
   toLogin () {
-    this.props.login(this.state)
-  }
-  changeInput (key, value) {
-    this.setState({[key]: value})
+    this.props.login(this.props.state)
   }
   render() {
     const inputData = [
@@ -34,7 +32,7 @@ class Login extends React.Component{
     ]
     let inputList = inputData.map((item) => {
       return (
-        <InputItem key={item.key} onChange={(value) => this.changeInput(item.key, value)} placeholder={item.placeholder}>{item.title}</InputItem>
+        <InputItem key={item.key} onChange={(value) => this.props.changeInput(item.key, value)} placeholder={item.placeholder}>{item.title}</InputItem>
       )
     })
     return (
@@ -57,17 +55,3 @@ class Login extends React.Component{
 export default Login
 
 
-// export default function InputList(WrappedComponent) {
-//   return class InputList extends Component {
-//     render() {
-//       return (
-//         <div>
-//           <div className="demo-header">
-//             我是标题
-//           </div>
-//           <WrappedComponent {...this.props}/>
-//         </div>
-//       )
-//     }
-//   }
-// }
