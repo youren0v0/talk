@@ -1,10 +1,11 @@
-这是主流程仿照了慕课网教程的练习项目
+练习项目react全家桶 + socket.io
 -------
 ### 包含的内容：
     react全家桶
     Mongodb
     webpack
     axios
+    socket.io
     计划使用jest进行单元测试
 ### 记录部分依赖项：
     cookie-parser
@@ -14,6 +15,8 @@
     utility 加密用的第三方库
     prop-types react提供的 对react组件中props对象中的变量进行类型检测
     browser-cookies 操作cookies的库
+    socket.io
+    socket.io-client
 ### 笔记：
 #### 1) prop-types
     摘自： https://www.cnblogs.com/penghuwan/p/6796139.html
@@ -68,4 +71,5 @@
     }
 #### 2) 高阶组件
 ##### 就是函数式编程，react的运用上似乎类似vue的slot
-##### vue的slot源码是怎么实现的？
+#####
+#### 3) socket.io

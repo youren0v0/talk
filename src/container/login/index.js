@@ -2,7 +2,7 @@ import React from 'react'
 import Logo from '@/component/logo'
 import { connect } from 'react-redux'
 import { login } from '@/redux/user'
-import form from '@/component/form'
+import from from '@/component/from'
 import { Redirect } from 'react-router-dom'
 import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
 
@@ -10,12 +10,13 @@ import {List, InputItem, WingBlank, WhiteSpace, Button} from 'antd-mobile'
   state => state.user,
   { login }
 )
-@form
+@from
 class Login extends React.Component{
   goRegister() {
     this.props.history.push('./register')
   }
   toLogin () {
+    console.log(this.props.state)
     this.props.login(this.props.state)
   }
   render() {

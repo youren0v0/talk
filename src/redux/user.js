@@ -4,6 +4,7 @@ import { getRedirectPath } from '../util/util'
 
 const AUTH_SUCCESS = 'AUTH_SUCCESS'
 const ERROR_MSG = 'ERROR_MSG'
+const SET_USERINFO = 'SET_USERINFO'
 const LOGOUT = 'LOGOUT'
 const initState={
   redirectTo: '',
@@ -36,8 +37,13 @@ function errorMsg(msg) {
 
 function authSuccess(obj){
   // 这里是要把password删掉，不传
-  const {password,...data} = obj
-  return {payload: data, type: AUTH_SUCCESS}
+  // const {password, ...data} = obj
+  localStorage.setItem('userInfo', JSON.stringify(obj))
+  return {payload: obj, type: AUTH_SUCCESS}
+}
+// TODO 密码不应该交给前端来处理，后端应该直接不传
+function fetchUserInfo(obj){
+  return {payload: obj, type: SET_USERINFO}
 }
 
 export function userinfo() {
@@ -47,6 +53,7 @@ export function userinfo() {
       if (res.status == 200) {
         console.log(res)
         if (res.data.code == 0) {
+          dispatch(authSuccess(res.data.data))
           // 有登录信息的
         } else {
           console.log(this.props.history, 'history')
@@ -64,6 +71,7 @@ export function userinfo() {
 }
 
 export function login({user, password}) {
+  console.log(user, password)
   if (!user || !password) {
     return errorMsg('缺少必填项')
   }
