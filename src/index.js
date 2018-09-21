@@ -12,15 +12,8 @@ import reducers from './reducers'
 import { Provider } from 'react-redux'
 // Provider组件，可以让容器组件拿到state。
 import registerServiceWorker from './registerServiceWorker'
-import { BrowserRouter, Route, Redirect, Switch} from 'react-router-dom'
-import Login from '@/container/login'
-import Register from '@/container/register'
-import BossInfo from '@/container/bossInfo'
-import GeniusInfo from '@/container/geniusInfo'
-import Chat from '@/container/chat'
-import Dashboard from '@/component/dashboard'
-
-import AuthRoute from '@/component/authroute'
+import { BrowserRouter } from 'react-router-dom'
+import Router from './router'
 const store = createStore(reducers, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : function () {}
@@ -30,19 +23,9 @@ const store = createStore(reducers, compose(
 ReactDOM.render(
   (<Provider store={store}>
     <BrowserRouter>
-      <div>
-        <AuthRoute></AuthRoute>
-        <Switch>
-          <Route path="/bossinfo" component={BossInfo}></Route>
-          <Route path="/geniusinfo" component={GeniusInfo}></Route>
-          <Route path="/login" component={Login}></Route>
-          <Route path="/register" component={Register}></Route>
-          <Route path="/chat/:id" component={Chat}></Route>
-          <Route component={Dashboard}></Route>
-        </Switch>
-      </div>
+      <Router></Router>
     </BrowserRouter>
-
+    
   </Provider>),
   document.getElementById('root')
 )

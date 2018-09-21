@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 const socket = io('ws://localhost:12312')
 
 @connect(
-  state => state.user,
+  state => state,
   { getMsgList, sendMsg }
 )
 @from
@@ -24,10 +24,26 @@ class Chat extends React.Component{
   }
   changeInput (key, value) {
     this.setState({[key]: value})
+    console.log(this.state.chat, 'chat~~~~~~~~')
   }
   chat() {
+    console.log(this.props, '~~~~~~~~~~~~')
+    console.log(this.props.user.user)
     this.props.sendMsg(this.props.match.params.id, this.state)
     socket.emit('chat', this.props.user)
+  }
+
+  handleSubmit(){
+    // socket.emit('sendmsg',{text:this.state.text})
+    // this.setState({text:''})
+    const from = this.props.user._id
+    const to = this.props.match.params.user
+    const msg = this.state.text
+    this.props.sendMsg({from,to,msg})
+    this.setState({
+      text:'',
+      showEmoji:false
+    })
   }
   render() {
     let userName = this.props.match.params.id
@@ -38,7 +54,7 @@ class Chat extends React.Component{
           return (<div key={index}>{v}</div>)
         })}
         <InputItem onChange={(value) => this.changeInput('chat', value)}>{'chat'}</InputItem>
-        <Button onClick={() => this.chat()}></Button>
+        <Button onClick={() => this.chat()}>发送</Button>
       </div>
 
     )

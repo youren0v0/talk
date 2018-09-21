@@ -36,9 +36,10 @@ class Login extends React.Component{
         <InputItem key={item.key} onChange={(value) => this.props.changeInput(item.key, value)} placeholder={item.placeholder}>{item.title}</InputItem>
       )
     })
+
     return (
       <div>
-        {this.props.redirectTo ? <Redirect to={this.props.redirectTo} /> : ''}
+        {this.props.redirectTo && this.props.redirectTo !== '/login' ? <Redirect to={this.props.redirectTo} /> : ''}
         <Logo />
         <WingBlank>
           <List>

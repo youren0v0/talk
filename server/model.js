@@ -26,18 +26,23 @@ const models = {
   },
   chat: {
   // 聊天
+    'chatid':{'type': String, require: true},
+    'from':{'type': String,'require': true},
+    'to':{'type': String,'require': true},
+    'read':{'type': Boolean,default: false},
+    'content':{'type': String,'require':true,'default': ''},
+    'create_time':{'type': Number,'default': Date.now}
   }
 }
 
 for(let m in models){
-  // console.log(models, 'models')
-  // console.log(m, 'models')
   mongoose.model(m, new mongoose.Schema(models[m]))
-  // console.log(mongoose.model('user'))
+  // 在 Mongoose 中，所有数据都由一个 Schema 开始创建。每一个 schema 都映射到一个 Mongodb 的集合(collection)，并定义了该集合(collection)中的文档(document)的形式。
+
 }
 module.exports = {
   getModel: function(name){
-    // console.log(mongoose, 'mongoose')
     return mongoose.model(name)
+    // 为Model 创建实例方法供Model 实例调用
   }
 }

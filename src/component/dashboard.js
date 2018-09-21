@@ -18,7 +18,6 @@ class Dashboard extends React.Component{
   render() {
     const {pathname} = this.props.location
     const user = this.props.user
-    console.log(this.props, '~~~~user~~~~')
     const navList = [
       {
         hide: user.type=='2',
@@ -51,7 +50,6 @@ class Dashboard extends React.Component{
         component: User
       }
     ]
-
     return (
       <div>
         <NavBar className='fixd-header' mode='dard'>{navList.find(v=>v.path==pathname).title}</NavBar>

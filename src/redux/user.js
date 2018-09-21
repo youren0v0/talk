@@ -23,11 +23,10 @@ export function user(state = initState, action) {
     case ERROR_MSG:
       return {...state, msg: action.msg, isAuth: false}
     case LOGOUT:
-      return {...initState, redirectTo: '/login'}
+      return {...initState, isAuth: false, redirectTo: '/login'}
     default:
       return state
   }
-
 }
 
 function errorMsg(msg) {
@@ -35,62 +34,55 @@ function errorMsg(msg) {
   return {msg, type: ERROR_MSG}
 }
 
-function authSuccess(obj){
-  // 这里是要把password删掉，不传
-  // const {password, ...data} = obj
+function authSuccess(obj) {
   localStorage.setItem('userInfo', JSON.stringify(obj))
   return {payload: obj, type: AUTH_SUCCESS}
-}
-// TODO 密码不应该交给前端来处理，后端应该直接不传
-function fetchUserInfo(obj){
-  return {payload: obj, type: SET_USERINFO}
 }
 
 export function userinfo() {
   return dispatch => {
     // 获取用户信息
-    axios.get('/user/info').then((res) => {
-      if (res.status == 200) {
-        console.log(res)
-        if (res.data.code == 0) {
-          dispatch(authSuccess(res.data.data))
-          // 有登录信息的
-        } else {
-          console.log(this.props.history, 'history')
-          this.props.history.push('/login')
+    let data = JSON.parse(localStorage.getItem('userInfo'))
+    if (data._id) {
+      dispatch(authSuccess(data))
+    } else {
+      axios.get('/user/info').then((res) => {
+        if (res.status === 200) {
+          if (res.data.code === 200) {
+            dispatch(authSuccess(res.data.data))
+          } else {
+            this.props.history.push('/login')
+          }
         }
-        console.log(res.data)
-      }
-    })
-    // 是否登录
-    // 用户的身份 type
-    // 用户是否完善信息
-    // 现在的url 是否和当前相同
-  }
+      })
+    }
 
+  }
 }
 
 export function login({user, password}) {
-  console.log(user, password)
   if (!user || !password) {
     return errorMsg('缺少必填项')
   }
   return dispatch => {
-    console.log('dispatch', {user, password})
     axios.post('/user/login', {user, password}).then((res) => {
-      console.log(res, 'res')
-      if (res.status == 200 && res.data.code === 0) {
-        console.log(res.data, 'data~~~~~~~~~~~')
+      if (res.status === 200 && res.data.code === 200) {
         dispatch(authSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }
     })
   }
-
 }
-export function logoutSubmit(){
-  return { type: LOGOUT }
+
+export function logout() {
+  console.log('logout')
+  localStorage.clear()
+  // return { type: LOGOUT }
+  return dispatch => {
+    dispatch({ type: LOGOUT })
+  }
+
 }
 
 export function register({type, user, password, password2}) {
@@ -101,30 +93,26 @@ export function register({type, user, password, password2}) {
     return errorMsg('两次输入密码不同')
   }
   return dispatch => {
-    console.log('dispatch', {user, password, type})
     axios.post('/user/register', {user, password, type}).then((res) => {
       console.log(res, 'res')
-      if (res.status == 200 && res.data.code === 0) {
+      if (res.status == 200 && res.data.code === 200) {
         dispatch(authSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }
     })
   }
-
 }
 
 export function update(data) {
   return dispatch => {
     axios.post('/user/update', data).then((res) => {
-      console.log(res, 'res')
-      if (res.status == 200 && res.data.code === 0) {
+      if (res.status == 200 && res.data.code === 200) {
         dispatch(authSuccess(res.data.data))
       } else {
         dispatch(errorMsg(res.data.msg))
       }
     })
   }
-
 }
 
