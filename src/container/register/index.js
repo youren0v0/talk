@@ -37,6 +37,7 @@ class Register extends React.Component{
     this.props.register(this.state)
   }
   render() {
+    console.log(11111111111111111)
     const RadioItem = Radio.RadioItem
     const inputData = [
       {

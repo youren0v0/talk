@@ -1,0 +1,5 @@
+export { default as Login } from './login/index'
+export { default as Register } from './register/index'
+export { default as BossInfo } from './bossInfo'
+export { default as GeniusInfo } from './geniusInfo'
+export { default as Chat } from './chat'
