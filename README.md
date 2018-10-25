@@ -2,8 +2,9 @@
 -------
 ### 启动：
     npm start
-    进入server文件夹=> nodemon server
     启动mongoDb=> mongod --config /usr/local/etc/mongod.conf
+    进入server文件夹=> nodemon server
+
 ### 包含的内容：
     react全家桶
     Mongodb
